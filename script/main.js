@@ -1,3 +1,16 @@
+// active button class remove
+const removeActive = () => {
+    try {
+        const removeButton = document.getElementsByClassName("active");
+          for(let btn of removeButton){
+            btn.classList.remove("active");
+          }
+        
+    } catch (error) {
+        console.log("removeActive code error");
+    }
+}
+
 // button section
 const loadButton = async () => {
     try {
@@ -19,7 +32,13 @@ const loadVideo = async () => {
     try {
         const fetchVideo = await fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
         const dataVideo = await fetchVideo.json()
-        displayVideo(dataVideo.videos)
+        {
+            // all button section
+            removeActive();
+            document.getElementById("all-btn").classList.add("active")
+
+            displayVideo(dataVideo.videos)
+        } 
 
     } 
     catch (error) {
@@ -35,10 +54,16 @@ const loadVideoCategory = async (id) => {
     const response = await fetch(url)
     const data = await response.json()
 
-   {const clickButton = document.getElementById(`btn-${id}`)
+// {} Curly brackets or braces duita paramiter nice and butto ka class add korci 
+      {
+        // Dynamic butto remove call section and added button class
+        removeActive();
+        const clickButton = document.getElementById(`btn-${id}`)
         clickButton.classList.add("active")
 
-        displayVideo(data.category)}
+        displayVideo(data.category)
+
+    };
        
 
     
