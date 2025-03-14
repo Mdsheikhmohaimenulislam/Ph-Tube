@@ -28,7 +28,7 @@ const loadButton = async () => {
 
 
 // video section
-const loadVideo = async (inputText) => {
+const loadVideo = async (inputText = "") => {
     try {
         const fetchVideo = await fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${inputText}`)
         const dataVideo = await fetchVideo.json()
