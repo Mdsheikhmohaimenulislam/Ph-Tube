@@ -74,15 +74,15 @@ const loadVideoCategory = async (id) => {
 };
 
 // showDetails button
-const showDetails = (videoId) => {
+const showDetails = async (videoId) => {
 
     const url =`
     https://openapi.programming-hero.com/api/phero-tube/video/${videoId}
 
     `
 
-     const response = fetch(url)
-     const data = response.json()
+     const response = await fetch(url)
+     const data = await response.json()
      displayDetailsVideo(data.video)
 
 }
@@ -94,29 +94,22 @@ const showDetails = (videoId) => {
 
 // displayDetailsVideo
 const displayDetailsVideo = (video) => {
-   document.getElementById("show_display").showModal()
-   const showcontainer = document.getElementById("show_display")
+    document.getElementById("show_details").showModal();
 
-    // const showDescription = document.createElement("p")
-    showcontainer.innerHTML =`
-            <!-- Open the modal using ID.showModal() method -->
-<!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
-
-    <dialog id="show_display" class="modal">
-  <div id="description"  class="modal-box">
-    <h3 class="text-lg pb-4 font-bold text-center">Description</h3>
-    <p>${video.title}</p>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
+    const detailsContainer = document.getElementById("details-container");
+    detailsContainer.innerHTML = `
+    <div class="card bg-base-100 image-full shadow-sm">
+  <figure>
+    <img
+      src="${video.thumbnail}"
+      alt="Thumbnail" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">${video.title}</h2>
+    <p>${video.description}</p>
   </div>
-</dialog>
-
+</div>
     `
-// showDescriptionBox.appendChild(showDescription)
 }
 
 
