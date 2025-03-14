@@ -28,9 +28,9 @@ const loadButton = async () => {
 
 
 // video section
-const loadVideo = async () => {
+const loadVideo = async (inputText) => {
     try {
-        const fetchVideo = await fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+        const fetchVideo = await fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${inputText}`)
         const dataVideo = await fetchVideo.json()
 
 //Example .then((dataVideo) => {  displayVideo(dataVideo.videos)   })  
@@ -159,7 +159,10 @@ const displayVideo = async (videos) => {
                          </div>
                         <div>
                             <h1 class ="text-base font-bold">${video.title}</h1>
-                            <p class ="flex gap-2 text-sm text-[#17171790]">${video.authors[0].profile_name} <img class="w-5 h-5" src="https://img.icons8.com/?size=64&id=eZo3c88c63il&format=png" /></p>
+                            <p class ="flex gap-2 text-sm text-[#17171790]">
+                            ${video.authors[0].profile_name} 
+                            ${video.authors[0].verified == true ? `<img class="w-5 h-5" src="https://img.icons8.com/?size=48&id=SRJUuaAShjVD&format=png" alt="">` : ``}
+                            </p>
                             <p class ="text-sm text-[#17171790]">${video.others.views} views</p>
                            
                         </div>
@@ -205,5 +208,11 @@ const displayButton =  (categories) => {
 
 };
 
+
+// search-box
+document.getElementById("search-box").addEventListener("keyup", (event) => {
+    const input = event.target.value
+    loadVideo(input);
+})
 
 loadButton()
